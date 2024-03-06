@@ -70,7 +70,7 @@ variable "firehose_buffer_size" {
   type        = number
   default     = 10
   validation {
-    condition     = var.retention_period >= 1 && var.retention_period <= 128
+    condition     = var.firehose_buffer_size >= 1 && var.firehose_buffer_size <= 128
     error_message = "Buffer size must be greater than 1 but less than 128 MB"
   }
 }
