@@ -16,7 +16,7 @@ variable "retention_period" {
   default     = 24
 
   validation {
-    condition     = var.retention_period > 24 && var.retention_period <= 8760
+    condition     = var.retention_period >= 24 && var.retention_period <= 8760
     error_message = "Retention period must be greater than 24 but less than 8760 hours"
   }
 }
