@@ -70,7 +70,7 @@ variable "firehose_buffering_size" {
   type        = number
   default     = 10
   validation {
-    condition     = var.firehose_buffer_size >= 1 && var.firehose_buffer_size <= 128
+    condition     = var.firehose_buffering_size >= 1 && var.firehose_buffering_size <= 128
     error_message = "Buffer size must be greater than 1 but less than 128 MB"
   }
 }
@@ -80,7 +80,7 @@ variable "firehose_buffering_interval" {
   type        = number
   default     = 400
   validation {
-    condition     = var.firehose_buffer_interval >= 60 && var.firehose_buffer_interval <= 900
+    condition     = var.firehose_buffering_interval >= 60 && var.firehose_buffering_interval <= 900
     error_message = "Buffer interval must be greater than 60 but less than 900 seconds"
   }
 }
