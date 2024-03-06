@@ -1,0 +1,9 @@
+resource "aws_kinesis_stream" "affiliate_stream" {
+  name             = var.stream_name
+  shard_count      = var.shard_count
+  shard_level_metrics = var.shard_level_metrics
+  retention_period = 24
+  tags = {
+    Environment = "Dev"
+  }
+}
