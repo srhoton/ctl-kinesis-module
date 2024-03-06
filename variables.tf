@@ -80,7 +80,7 @@ variable "firehose_buffer_interval" {
   type        = number
   default     = 400
   validation {
-    condition     = var.retention_period >= 60 && var.retention_period <= 900
+    condition     = var.firehose_buffer_interval >= 60 && var.firehose_buffer_interval <= 900
     error_message = "Buffer interval must be greater than 60 but less than 900 seconds"
   }
 }
