@@ -65,7 +65,7 @@ variable "firehose_name" {
   default     = "exampleFirehose"
 }
 
-variable "firehose_buffer_size" {
+variable "firehose_buffering_size" {
   description = "The size of the buffer for the Kinesis Firehose delivery stream"
   type        = number
   default     = 10
@@ -75,7 +75,7 @@ variable "firehose_buffer_size" {
   }
 }
 
-variable "firehose_buffer_interval" {
+variable "firehose_buffering_interval" {
   description = "The interval for buffering data for the Kinesis Firehose delivery stream"
   type        = number
   default     = 400

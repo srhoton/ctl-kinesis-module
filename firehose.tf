@@ -1,11 +1,12 @@
 resource "aws_kinesis_firehose_delivery_stream" "affiliate_firehose" {
   name        = var.firehose_name
   destination = "s3"
-  s3_configuration {
+  #Note: s3_configuration is deprecated, use extended_s3_configuration instead. See here: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kinesis_firehose_delivery_stream#destination
+  extended_s3_configuration {
     role_arn            = aws_iam_role.firehose_role.arn
     bucket_arn          = aws_s3_bucket.firehose_target.arn
-    buffer_size         = var.firehose_buffer_size
-    buffer_interval     = var.firehose_buffer_interval
+    buffering_size         = var.firehose_buffering_size
+    buffering_interval     = var.firehose_buffering_interval
     compression_format  = var.firehose_compression_format
     error_output_prefix = var.firehose_error_output_prefix
     prefix              = var.firehose_prefix
