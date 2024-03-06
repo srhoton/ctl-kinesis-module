@@ -6,6 +6,13 @@ resource "aws_s3_bucket" "firehose_target" {
 
 }
 
+resource "aws_s3_bucket_ownership_controls" "firehose_target" {
+  bucket = aws_s3_bucket.firehose_target.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 resource "aws_s3_bucket_acl" "firehose_target" {
   bucket = aws_s3_bucket.firehose_target.id
   acl    = "private"
