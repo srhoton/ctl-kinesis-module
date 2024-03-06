@@ -106,3 +106,59 @@ variable "firehose_prefix" {
   type        = string
   default     = "firehose-data/"
 }
+
+variable "dashboard_name" {
+  description = "The name of the CloudWatch dashboard"
+  type        = string
+  default     = "FirehoseMonitoring"
+}
+
+variable "dashboard_body" {
+  description = "The body of the CloudWatch dashboard"
+  type        = string
+  default     = <<EOF
+{
+widgets = [
+  {
+    type = "metric"
+    x = 0
+    y = 0
+    width = 12
+    height = 6
+    properties = {
+      metrics = [
+        ["AWS/Firehose", "IncomingRecords", "DeliveryStreamName", aws_kinesis_firehose_delivery_stream.affiliate_firehose.name],
+        [".", "DeliveryToS3.Bytes", ".", "."]
+      ]
+      view = "timeSeries"
+      stacked = false
+    }
+  }
+]
+}
+EOF
+}
+
+variable "incoming_records_alarm_name" {
+  description = "The name of the CloudWatch alarm for incoming records"
+  type        = string
+  default     = "high-incoming-records"
+}
+
+variable "incoming_records_alarm_period" {
+  description = "The period for the CloudWatch alarm for incoming records"
+  type        = number
+  default     = 300
+}
+
+variable "incoming_records_alarm_evaluation_periods" {
+  description = "The number of periods for the CloudWatch alarm for incoming records"
+  type        = number
+  default     = 1
+}
+
+variable "incoming_records_alarm_threshold" {
+  description = "The threshold for the CloudWatch alarm for incoming records"
+  type        = number
+  default     = 1000
+}
