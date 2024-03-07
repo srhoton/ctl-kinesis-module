@@ -14,7 +14,7 @@ resource "aws_cloudwatch_metric_alarm" "firehose_incoming_records_alarm" {
   threshold         = var.incoming_records_alarm_threshold
   alarm_description = "Alarm when the number of incoming records is too high for the Kinesis Firehose delivery stream ${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}"
   dimensions = {
-    StreamName = aws_kinesis_firehose_delivery_stream.example_firehose.name
+    StreamName = aws_kinesis_firehose_delivery_stream.affiliate_firehose.name
   }
   #alarm_actions = [/* Add notification action, e.g., SNS topic ARN */]
   alarm_actions = var.alarm_actions
