@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_dashboard" "firehose_dashboard" {
   dashboard_name = var.dashboard_name
-  dashboard_body = jsonencode(var.dashboard_body)
+  dashboard_body = var.dashboard_body
 }
 
 resource "aws_cloudwatch_metric_alarm" "firehose_incoming_records_alarm" {

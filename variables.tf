@@ -118,23 +118,33 @@ variable "dashboard_body" {
   type        = string
   default     = <<EOF
 {
-widgets = [
-  {
-    type = "metric"
-    x = 0
-    y = 0
-    width = 12
-    height = 6
-    properties = {
-      metrics = [
-        ["AWS/Firehose", "IncomingRecords", "DeliveryStreamName", aws_kinesis_firehose_delivery_stream.affiliate_firehose.name],
-        [".", "DeliveryToS3.Bytes", ".", "."]
-      ]
-      view = "timeSeries"
-      stacked = false
-    }
-  }
-]
+    "Widgets": [
+        {
+            "Type": "Metric",
+            "X": 0,
+            "Y": 0,
+            "Width": 12,
+            "Height": 6,
+            "Properties": {
+                "Metrics": [
+                    [
+                        "AWS/Firehose",
+                        "IncomingRecords",
+                        "DeliveryStreamName",
+                        "${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}"
+                    ],
+                    [
+                        ".",
+                        "DeliveryToS3.Bytes",
+                        ".",
+                        "."
+                    ]
+                ],
+                "View": "timeSeries",
+                "Stacked": "false"
+            }
+        }
+    ]
 }
 EOF
 }
