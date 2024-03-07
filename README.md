@@ -8,7 +8,7 @@ This module creates the need a different structure to create a Kinesis Stream, w
 Here is an example main.tf file that uses the module:
 ```hcl
 module "ctl_kinesis" {
-  source = "git@github.com:srhoton/ctl-kinesis-module?ref=docs"
+  source = "git@github.com:srhoton/ctl-kinesis-module?ref=v1.0.0"
   alarm_actions = ["arn:aws:sns:us-east-1:745744530215:ctl-test"]
   dashboard_name = "ctl-test"
   delivery_to_s3_bytes_alarm_evaluation_periods = "1"
