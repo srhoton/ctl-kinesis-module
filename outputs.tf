@@ -24,6 +24,6 @@ output "firehose_role_arn" {
 }
 
 output "cloudwatch_dashboard_url" {
-  value       = aws_cloudwatch_dashboard.firehose_dashboard.url
-  description = "The URL of the CloudWatch dashboard for the Kinesis Firehose"
+  value       = aws_cloudwatch_dashboard.firehose_dashboard.id
+  description = "The Id of the CloudWatch dashboard for the Kinesis Firehose"
 }
