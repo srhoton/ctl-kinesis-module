@@ -3,6 +3,11 @@ output "s3_bucket_id" {
   description = "The ID of the S3 bucket"
 }
 
+output "s3_bucket_name" {
+  value       = aws_s3_bucket.firehose_target.bucket
+  description = "The name of the S3 bucket"
+  
+}
 output "s3_bucket_arn" {
   value       = aws_s3_bucket.firehose_target.arn
   description = "The ARN of the S3 bucket"
@@ -23,7 +28,7 @@ output "firehose_role_arn" {
   description = "The ARN of the IAM role for the Kinesis Firehose"
 }
 
-output "cloudwatch_dashboard_url" {
-  value       = aws_cloudwatch_dashboard.firehose_dashboard.url
-  description = "The URL of the CloudWatch dashboard for the Kinesis Firehose"
+output "cloudwatch_dashboard_id" {
+  value       = aws_cloudwatch_dashboard.firehose_dashboard.id
+  description = "The Id of the CloudWatch dashboard for the Kinesis Firehose"
 }
