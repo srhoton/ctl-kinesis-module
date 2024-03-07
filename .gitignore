@@ -1,0 +1,48 @@
+# Operating System specific
+.vscode/
+.idea/
+*.log
+*.pyc
+*.pyo
+*.pyd
+*.exe
+*.dll
+*.zip
+*.tar.gz
+*.gz
+*.rar
+*.ear
+*.jar
+*.war
+*.jar.signatures
+*.jks
+*.p12
+*.pem
+*.csr
+*.crt
+*.key
+*.pfx
+*.ini
+
+# Terraform specific
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvar
+*.tfplan
+*.tfplan.*
+*.tfbackup
+
+# IDE and Text Editor specific (change as needed)
+*.sublime-workspace
+*.workspace
+.vscode/*
+
+# Linting tools and other miscellaneous files
+*.coverage
+*.out
+*.err
+*.xml
+*.swp
+*.bak

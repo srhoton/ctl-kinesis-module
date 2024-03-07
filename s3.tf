@@ -14,7 +14,7 @@ resource "aws_s3_bucket_ownership_controls" "firehose_target" {
 }
 
 resource "aws_s3_bucket_acl" "firehose_target" {
-  bucket = aws_s3_bucket.firehose_target.id
-  acl    = "private"
+  bucket     = aws_s3_bucket.firehose_target.id
+  acl        = "private"
   depends_on = [aws_s3_bucket_ownership_controls.firehose_target]
 }
