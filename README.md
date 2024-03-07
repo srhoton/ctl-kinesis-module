@@ -9,7 +9,7 @@ Here is an example main.tf file that uses the module:
 ```hcl
 module "ctl_kinesis" {
   source = "git@github.com:srhoton/ctl-kinesis-module?ref=docs"
-  alarm_actions = ["arn:aws:sns:us-east-1:705740530616:ctl-test"]
+  alarm_actions = ["arn:aws:sns:us-east-1:745744530215:ctl-test"]
   dashboard_name = "ctl-test"
   delivery_to_s3_bytes_alarm_evaluation_periods = "1"
   delivery_to_s3_bytes_alarm_name = "high-delivery-to-s3-bytes"
