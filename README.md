@@ -5,6 +5,40 @@ This module creates the need a different structure to create a Kinesis Stream, w
 
 ## Example Usage
 
+Here is an example main.tf file that uses the module:
+```hcl
+module "ctl_kinesis" {
+  source = "git@github.com:srhoton/ctl-kinesis-module?ref=docs"
+  alarm_actions = ["arn:aws:sns:us-east-1:705740530616:ctl-test"]
+  dashboard_name = "ctl-test"
+  delivery_to_s3_bytes_alarm_evaluation_periods = "1"
+  delivery_to_s3_bytes_alarm_name = "high-delivery-to-s3-bytes"
+  delivery_to_s3_bytes_alarm_period = "300"
+  delivery_to_s3_bytes_alarm_threshold = "1000000"
+  environment = "dev"
+  firehose_buffering_interval = "300"
+  firehose_buffering_size = "10"
+  firehose_compression_format = "GZIP"
+  firehose_error_output_prefix = "firehose-errors/"
+  firehose_name = "exampleFirehose"
+  firehose_policy_name = "firehose_to_s3_policy"
+  firehose_prefix = "firehose-data/"
+  firehose_role_name = "firehose_role"
+  incoming_records_alarm_evaluation_periods = "1"
+  incoming_records_alarm_name = "high-incoming-records"
+  incoming_records_alarm_period = "300"
+  incoming_records_alarm_threshold = "1000"
+  retention_period = "24"
+  shard_count = "1"
+  shard_level_metrics = ["IncomingBytes", "OutgoingBytes"]
+  stream_name = "affiliate-stream"
+  tags_map = {
+    "Module": "ctl-kinesis"
+  }
+  target_bucket_name_prefix = "ctl-test-prefix"
+}
+
+```hcl
 ## Requirements
 
 No requirements.
