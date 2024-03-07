@@ -4,39 +4,81 @@ resource "aws_cloudwatch_dashboard" "firehose_dashboard" {
 {
     "widgets": [
         {
-            "type": "metric",
-            "x": 0,
-            "y": 0,
-            "width": 6,
-            "height": 6,
-            "properties": {
-                "view": "timeSeries",
-                "stacked": false,
-                "metrics": [
-                    [ "AWS/Firehose", "DescribeDeliveryStream.Latency", "DeliveryStreamName", "exampleFirehose" ],
-                    [ ".", "DescribeDeliveryStream.Requests", ".", "." ]
-                ],
-                "region": "us-east-1",
-                "title": "Latency and Requests"
+            "Type": "Metric",
+            "Properties": {
+                "MetricDataQuery": {
+                    "MetricStat": {
+                        "Metrics": [
+                            [
+                                "AWS/KinesisDataStream",
+                                "DescribeStreamStatistics",
+                                null,
+                                [
+                                    {
+                                        "Name": "${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}",
+                                        "Value": ""
+                                    }
+                                ]
+                            ],
+                            {
+                                "Label": "Throughput",
+                                "MetricName": "IncomingBytesPerSecond"
+                            },
+                            {
+                                "Label": "Records per second",
+                                "MetricName": "RecordsPerSecond"
+                            }
+                        ]
+                    },
+                    "FilterPattern": "",
+                    "Period": 60,
+                    "Statistic": [
+                        "SampleCount",
+                        "Sum"
+                    ]
+                },
+                "Title": "Kinesis Data Stream Metrics",
+                "Height": {
+                    "Type": "Percent",
+                    "Value": 50
+                },
+                "Width": {
+                    "Type": "Percent",
+                    "Value": 50
+                },
+                "Y": 0,
+                "X": 0
             }
         },
         {
-            "type": "metric",
-            "x": 6,
-            "y": 0,
-            "width": 6,
-            "height": 6,
-            "properties": {
-                "view": "timeSeries",
-                "stacked": false,
-                "metrics": [
-                    [ "AWS/S3", "NumberOfObjects", "BucketName", "srhoton-cur-bucket", "StorageType", "AllStorageTypes", { "period": 86400 } ],
-                    [ ".", "BucketSizeBytes", ".", ".", ".", "StandardStorage", { "period": 86400 } ]
-                ],
-                "region": "us-east-1"
+            "Type": "Log",
+            "Properties": {
+                "Title": "Firehose Kinesis Data Stream Log",
+                "FilterPattern": "",
+                "StreamName": "${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}",
+                "StartTime": "$$-NOW-30M",
+                "EndTime": "$$-NOW",
+                "Height": {
+                    "Type": "Percent",
+                    "Value": 50
+                },
+                "Width": {
+                    "Type": "Percent",
+                    "Value": 50
+                },
+                "Y": 50,
+                "X": 0
             }
         }
-    ]
+    ],
+    "Width": {
+        "Type": "Pixels",
+        "Value": 800
+    },
+    "Height": {
+        "Type": "Pixels",
+        "Value": 400
+    }
 }
 EOF
 }
