@@ -9,7 +9,18 @@ resource "aws_cloudwatch_dashboard" "firehose_dashboard" {
             ["AWS/Firehose", "IncomingRecords", "DeliveryStreamName", aws_kinesis_firehose_delivery_stream.affiliate_firehose.name]
           ]
           view = "timeSeries"
-          stacked = false
+          stacked = false,
+          title = "Incoming Records",
+          annotations = {
+            horizontal = [
+              {
+                label = "Alarm Threshold"
+                value = var.incoming_records_alarm_threshold
+                color = "#ff0000"
+              }
+            ]
+          },
+
         }
       }
     ]
