@@ -11,6 +11,7 @@ resource "aws_cloudwatch_dashboard" "firehose_dashboard" {
           view = "timeSeries"
           stacked = false,
           title = "Incoming Records",
+          region = "us-east-1",
           annotations = {
             horizontal = [
               {
