@@ -38,7 +38,7 @@ module "ctl_kinesis" {
   target_bucket_name_prefix = "ctl-test-prefix"
 }
 
-```hcl
+```
 ## Requirements
 
 No requirements.
