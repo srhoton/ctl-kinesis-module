@@ -162,3 +162,9 @@ variable "incoming_records_alarm_threshold" {
   type        = number
   default     = 1000
 }
+
+variable "alarm_actions" {
+  description = "A list of ARNs of SNS topics to use as alarm actions"
+  type        = list(string)
+  default     = []
+}
