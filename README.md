@@ -39,6 +39,12 @@ module "ctl_kinesis" {
 }
 
 ```
+## Testing
+To test the module, create a main.tf file with the above code, then copy the contents of the test directory into the same directory as the main.tf file.  Then run the following commands:
+```terraform
+terraform test
+```
+Note that this uses [Terraform Tests](https://developer.hashicorp.com/terraform/tutorials/configuration-language/test), and does require Terraform 1.7.0 or later.
 ## Requirements
 
 No requirements.
