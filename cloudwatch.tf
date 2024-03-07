@@ -1,86 +1,19 @@
 resource "aws_cloudwatch_dashboard" "firehose_dashboard" {
   dashboard_name = var.dashboard_name
-  dashboard_body = <<EOF
-{
-    "widgets": [
-        {
-            "Type": "Metric",
-            "Properties": {
-                "MetricDataQuery": {
-                    "MetricStat": {
-                        "Metrics": [
-                            [
-                                "AWS/KinesisDataStream",
-                                "DescribeStreamStatistics",
-                                null,
-                                [
-                                    {
-                                        "Name": "${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}",
-                                        "Value": ""
-                                    }
-                                ]
-                            ],
-                            {
-                                "Label": "Throughput",
-                                "MetricName": "IncomingBytesPerSecond"
-                            },
-                            {
-                                "Label": "Records per second",
-                                "MetricName": "RecordsPerSecond"
-                            }
-                        ]
-                    },
-                    "FilterPattern": "",
-                    "Period": 60,
-                    "Statistic": [
-                        "SampleCount",
-                        "Sum"
-                    ]
-                },
-                "Title": "Kinesis Data Stream Metrics",
-                "Height": {
-                    "Type": "Percent",
-                    "Value": 50
-                },
-                "Width": {
-                    "Type": "Percent",
-                    "Value": 50
-                },
-                "Y": 0,
-                "X": 0
-            }
-        },
-        {
-            "Type": "Log",
-            "Properties": {
-                "Title": "Firehose Kinesis Data Stream Log",
-                "FilterPattern": "",
-                "StreamName": "${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}",
-                "StartTime": "$$-NOW-30M",
-                "EndTime": "$$-NOW",
-                "Height": {
-                    "Type": "Percent",
-                    "Value": 50
-                },
-                "Width": {
-                    "Type": "Percent",
-                    "Value": 50
-                },
-                "Y": 50,
-                "X": 0
-            }
+  dashboard_body = jsonencode({
+    widgets = [
+      {
+        type = "metric"
+        properties = {
+          metrics = [
+            ["AWS/Firehose", "IncomingRecords", "DeliveryStreamName", aws_kinesis_firehose_delivery_stream.affiliate_firehose.name]
+          ]
+          view = "timeSeries"
+          stacked = false
         }
-    ],
-    "Width": {
-        "Type": "Pixels",
-        "Value": 800
-    },
-    "Height": {
-        "Type": "Pixels",
-        "Value": 400
-    }
-}
-EOF
+      }
+    ]
+  })
 }
 
 resource "aws_cloudwatch_metric_alarm" "firehose_incoming_records_alarm" {
