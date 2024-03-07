@@ -44,7 +44,7 @@ To test the module, create a main.tf file with the above code, then copy the con
 ```terraform
 terraform test
 ```
-Note that this uses [Terraform Tests](https://developer.hashicorp.com/terraform/tutorials/configuration-language/test), and does require Terraform 1.7.0 or later.
+Note that this uses [Terraform Tests](https://developer.hashicorp.com/terraform/tutorials/configuration-language/test), and does require Terraform 1.7.0 or later. Additionally the test suite will do multiple applies, so it will create and destroy resources an AWS account.  It is recommended to use a test account for this purpose.
 ## Requirements
 
 No requirements.
