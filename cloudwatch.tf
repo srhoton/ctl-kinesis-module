@@ -1,6 +1,36 @@
 resource "aws_cloudwatch_dashboard" "firehose_dashboard" {
   dashboard_name = var.dashboard_name
-  dashboard_body = var.dashboard_body
+  dashboard_body = <<EOF
+{
+    "Widgets": [
+        {
+            "Type": "Metric",
+            "X": 0,
+            "Y": 0,
+            "Width": 12,
+            "Height": 6,
+            "Properties": {
+                "Metrics": [
+                    [
+                        "AWS/Firehose",
+                        "IncomingRecords",
+                        "DeliveryStreamName",
+                        "${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}"
+                    ],
+                    [
+                        ".",
+                        "DeliveryToS3.Bytes",
+                        ".",
+                        "."
+                    ]
+                ],
+                "View": "timeSeries",
+                "Stacked": "false"
+            }
+        }
+    ]
+}
+EOF
 }
 
 resource "aws_cloudwatch_metric_alarm" "firehose_incoming_records_alarm" {
@@ -16,6 +46,5 @@ resource "aws_cloudwatch_metric_alarm" "firehose_incoming_records_alarm" {
   dimensions = {
     StreamName = aws_kinesis_firehose_delivery_stream.affiliate_firehose.name
   }
-  #alarm_actions = [/* Add notification action, e.g., SNS topic ARN */]
   alarm_actions = var.alarm_actions
 }

@@ -113,42 +113,6 @@ variable "dashboard_name" {
   default     = "FirehoseMonitoring"
 }
 
-variable "dashboard_body" {
-  description = "The body of the CloudWatch dashboard"
-  type        = string
-  default     = <<EOF
-{
-    "Widgets": [
-        {
-            "Type": "Metric",
-            "X": 0,
-            "Y": 0,
-            "Width": 12,
-            "Height": 6,
-            "Properties": {
-                "Metrics": [
-                    [
-                        "AWS/Firehose",
-                        "IncomingRecords",
-                        "DeliveryStreamName",
-                        "${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}"
-                    ],
-                    [
-                        ".",
-                        "DeliveryToS3.Bytes",
-                        ".",
-                        "."
-                    ]
-                ],
-                "View": "timeSeries",
-                "Stacked": "false"
-            }
-        }
-    ]
-}
-EOF
-}
-
 variable "incoming_records_alarm_name" {
   description = "The name of the CloudWatch alarm for incoming records"
   type        = string
@@ -174,7 +138,7 @@ variable "incoming_records_alarm_threshold" {
 }
 
 variable "alarm_actions" {
-  description = "A list of ARNs of SNS topics to use as alarm actions"
+  description = "A list of ARNs to use as alarm actions"
   type        = list(string)
   default     = []
 }
