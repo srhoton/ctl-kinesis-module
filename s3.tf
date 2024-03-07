@@ -1,5 +1,11 @@
+resource "random_string" "random" {
+  length           = 16
+  special          = true
+  override_special = "/@£$"
+}
+
 resource "aws_s3_bucket" "firehose_target" {
-  bucket = var.target_bucket_name
+  bucket = "${var.target_bucket_name_prefix}-${random_string.random.result}"
   #This is deprecated (see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#acl), use the acl block instead
   #acl = "private"
   tags = { for tag_key, tag_value in local.merged_tags : tag_key => tag_value }

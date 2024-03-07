@@ -41,7 +41,7 @@ variable "shard_level_metrics" {
   default     = ["IncomingBytes", "OutgoingBytes"]
 }
 
-variable "target_bucket_name" {
+variable "target_bucket_name_prefix" {
   description = "The name of the S3 bucket to use as the target for the Kinesis Firehose delivery stream"
   type        = string
   default     = "firehose-target-bucket"
