@@ -27,7 +27,7 @@ resource "aws_cloudwatch_dashboard" "firehose_dashboard" {
         type = "metric"
         properties = {
           metrics = [
-            ["AWS/S3", "DeliveryToS3.Bytes", "BucketName", aws_s3_bucket.firehose_target_bucket.id]
+            ["AWS/S3", "DeliveryToS3.Bytes", "BucketName", aws_s3_bucket.firehose_target.id]
           ]
           view    = "timeSeries"
           stacked = false,
@@ -76,7 +76,7 @@ resource "aws_cloudwatch_metric_alarm" "firehose_delivery_to_s3_bytes_alarm" {
   alarm_description   = "Alarm when the number of bytes delivered to S3 is too high for the Kinesis Firehose delivery stream ${aws_kinesis_firehose_delivery_stream.affiliate_firehose.name}"
   dimensions = {
     Name  = "BucketName"
-    Value = aws_s3_bucket.firehose_target_bucket.id
+    Value = aws_s3_bucket.firehose_target.id
   }
   alarm_actions = var.alarm_actions
 }
