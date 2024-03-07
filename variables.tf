@@ -137,6 +137,29 @@ variable "incoming_records_alarm_threshold" {
   default     = 1000
 }
 
+variable "delivery_to_s3_bytes_alarm_name" {
+  description = "The name of the CloudWatch alarm for delivery to S3 bytes"
+  type        = string
+  default     = "high-delivery-to-s3-bytes"
+}
+
+variable "delivery_to_s3_bytes_alarm_period" {
+  description = "The period for the CloudWatch alarm for delivery to S3 bytes"
+  type        = number
+  default     = 300
+}
+
+variable "delivery_to_s3_bytes_alarm_evaluation_periods" {
+  description = "The number of periods for the CloudWatch alarm for delivery to S3 bytes"
+  type        = number
+  default     = 1
+}
+
+variable "delivery_to_s3_bytes_alarm_threshold" {
+  description = "The threshold for the CloudWatch alarm for delivery to S3 bytes"
+  type        = number
+  default     = 1000000
+}
 variable "alarm_actions" {
   description = "A list of ARNs to use as alarm actions"
   type        = list(string)
