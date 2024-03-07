@@ -1,7 +1,9 @@
 resource "random_string" "random" {
-  length           = 16
-  special          = true
-  override_special = "/@£$"
+  length  = 10
+  special = false
+  upper   = true
+  numeric = true
+  lower   = true
 }
 
 resource "aws_s3_bucket" "firehose_target" {
